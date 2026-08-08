@@ -10,8 +10,9 @@
 | Icons | Material Icons | Current icon system |
 | Testing | `flutter_test` | App-level widget smoke test |
 | Data source | In-memory mock objects | Temporary UI prototype data |
+| Mini app runtime | WebView + local asset server | Bundled mini app host demo |
 
-There is currently no SVG dependency, auth package, Supabase client, HTTP client, database, or local persistence layer.
+There is currently no SVG dependency, auth package, Supabase client, HTTP client, database, or local persistence layer. `webview_flutter` is present for the bundled mini app host demo.
 
 ## Startup and Routing
 
@@ -19,9 +20,11 @@ There is currently no SVG dependency, auth package, Supabase client, HTTP client
 2. `lib/main_app.dart` creates `GetMaterialApp`, applies `AppTheme.lightTheme`, initial binding, and route table.
 3. `AppPages` registers one route: `Routes.profileScreen`.
 4. `ProfileBinding` registers `ProfileController` with `Get.lazyPut(..., fenix: true)`.
-5. `ProfileScreen` extends `BaseView<ProfileController>` and renders the entire current mobile shell.
+5. `ProfileScreen` extends `BaseView<ProfileController>` and renders the main mobile shell.
+6. `MiniAppHostBinding` registers `MiniAppHostController` for `Routes.miniAppHostScreen`.
 
 The three bottom tabs are internal reactive state, not separate GetX routes. App Detail is also selected state inside the shell.
+The Mini App Host is a separate GetX route opened from the Apps tab.
 
 ## Current Feature Boundary
 
@@ -30,6 +33,11 @@ lib/app/features/profile/
 ├── binding/profile_binding.dart
 ├── controller/profile_controller.dart
 └── screen/profile_screen.dart
+
+lib/app/features/mini_app_host/
+├── binding/mini_app_host_binding.dart
+├── controller/mini_app_host_controller.dart
+└── screen/mini_app_host_screen.dart
 ```
 
 Despite the directory name, this feature presently contains the whole prototype:
@@ -52,6 +60,8 @@ lib/app/features/apps/
 lib/app/features/profile/
 lib/app/data/ or lib/app/services/
 ```
+
+The mini app host uses `lib/app/services/mini_app_asset_server.dart` to serve `assets/mini_app` through a phone-local loopback URL. The bundled Vite mini app source lives in `mini_apps/quickpay_pass`.
 
 ## Reactive State
 

@@ -1,6 +1,6 @@
 # Current State
 
-Last synchronized: 2026-07-13
+Last synchronized: 2026-08-08
 
 ## Branch Truth
 
@@ -12,13 +12,15 @@ Canonical repository: `https://github.com/theBuilderUni/TheFlutterBuilderStudioA
 
 The app currently runs as a Flutter Material 3 application with GetX routing, dependency injection, and reactive state.
 
-The single registered route opens `ProfileScreen`, which presently acts as the complete mobile shell. It contains:
+The primary registered route opens `ProfileScreen`, which presently acts as the main mobile shell. It contains:
 
 - Home
 - Rewards
 - Apps
 - App Squad detail
 - bottom navigation between Home, Rewards, and Apps
+
+An additional `MiniAppHostScreen` route hosts a bundled Vite mini app in WebView. It is opened from the Apps tab through the Mini App Host card.
 
 `ProfileController` currently owns mock Builder, Squad/App, and Work Item records plus UI state for tabs, Rewards mode, search, selected App, and followed Apps.
 
@@ -32,6 +34,8 @@ The single registered route opens `ProfileScreen`, which presently acts as the c
 - follow/unfollow an App for the current runtime session
 - switch between Rewards Receive and Send presentations
 - display WIP, Committed Work, and Work History from linked mock Work Items
+- open the bundled QuickPay mini app demo from a local phone URL
+- exchange mock profile/Rewards messages between JavaScript and Flutter through a bridge
 
 ## Mock-Only Behavior
 
@@ -44,6 +48,15 @@ The current app has no persistence or external data source. The following are pl
 - App records and follow state
 - Work Item records and counts
 - notifications button
+- mini app host actions and bridge responses
+
+## Mini App Host Runtime
+
+`MiniAppHostController` starts `MiniAppAssetServer`, which binds to `127.0.0.1` on a dynamic port and serves files from `assets/mini_app`.
+
+The WebView loads that local URL. This is a phone-local runtime server for bundled assets, not a remote public host.
+
+The copied mini app source lives in `mini_apps/quickpay_pass`. It remains a demo mini app and does not perform real Rewards operations.
 
 ## Platform Branding
 
@@ -61,6 +74,8 @@ The current implementation has passed:
 - `flutter analyze`
 - `flutter test test\widget_test.dart --reporter expanded`
 - Android debug APK build
+
+The mini app host change has also passed `flutter analyze`.
 
 ## Next Engineering Phase
 

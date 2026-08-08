@@ -43,3 +43,9 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Mini app workspace output
+mini_apps/**/node_modules/
+mini_apps/**/dist/
+mini_apps/**/.env
+mini_apps/**/.env.*

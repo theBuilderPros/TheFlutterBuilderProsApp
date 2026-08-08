@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:the_builder_studio/app/constant/resources/app_colors.dart';
 import 'package:the_builder_studio/app/constant/resources/app_images.dart';
+import 'package:the_builder_studio/app/constant/routing/app_route.dart';
 import 'package:the_builder_studio/app/core/base/base_view.dart';
 import 'package:the_builder_studio/app/features/profile/controller/profile_controller.dart';
 
@@ -339,6 +340,43 @@ class _Apps extends GetView<ProfileController> {
       title: 'Apps',
       subtitle: 'Follow App Squads and track what they are building.',
       children: [
+        _Card(
+          child: Row(
+            children: [
+              Container(
+                width: 44,
+                height: 44,
+                decoration: BoxDecoration(
+                  color: AppColors.violetSoft,
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                child: const Icon(Icons.apps_rounded, color: AppColors.violet),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Mini App Host',
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      'Open the bundled QuickPay mini app demo.',
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                  ],
+                ),
+              ),
+              TextButton(
+                onPressed: () => Get.toNamed(Routes.miniAppHostScreen),
+                child: const Text('Open'),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 18),
         TextField(
           onChanged: (v) => controller.search.value = v,
           decoration: const InputDecoration(
@@ -438,7 +476,7 @@ class _SquadCard extends GetView<ProfileController> {
   Widget build(BuildContext context) {
     final items = controller.itemsFor(squad.id);
     return _Card(
-          child: Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
@@ -589,8 +627,7 @@ class _Card extends StatelessWidget {
     child: ClipRRect(
       borderRadius: BorderRadius.circular(20),
       child: Column(
-        children: [Padding(padding: const EdgeInsets.all(16), child: child),
-        ],
+        children: [Padding(padding: const EdgeInsets.all(16), child: child)],
       ),
     ),
   );

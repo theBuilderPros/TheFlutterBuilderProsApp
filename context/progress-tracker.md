@@ -1,6 +1,6 @@
 # Progress Tracker
 
-Last synchronized: 2026-07-13
+Last synchronized: 2026-08-08
 
 ## Completed
 
@@ -25,6 +25,9 @@ Last synchronized: 2026-07-13
 - implemented mock Rewards Receive/Send mode switching
 - implemented App Work Item grouping for WIP, Committed Work, and Work History
 - added mock Builder, App, and Work Item records aligned with Workspace terminology
+- added a Mini App Host entry from Apps
+- added a bundled QuickPay mini app WebView demo
+- added a JavaScript bridge demo for profile, Rewards action, Rewards refresh, and close
 
 ### Design System
 
@@ -52,6 +55,8 @@ Last synchronized: 2026-07-13
 - notification action is a placeholder
 - screen/controller implementation remains consolidated in the profile feature
 - limited automated coverage
+- Mini App Host is demo-only and uses mock bridge responses
+- bundled mini app package is not remotely fetched, signed, or version-validated
 
 ## Next Recommended Work
 
@@ -64,6 +69,7 @@ Last synchronized: 2026-07-13
 7. design and implement Rewards service security deliberately
 8. add widget tests for navigation, search, follow state, and Rewards modes
 9. add integration tests once a real backend flow exists
+10. define a production mini app registry, manifest validation, and permission policy before using remote mini apps
 
 ## Do Not Claim Yet
 
@@ -74,3 +80,5 @@ Last synchronized: 2026-07-13
 - persisted follows
 - real notifications
 - production readiness
+- production mini app marketplace behavior
+- real mini app payment or Rewards transfer behavior

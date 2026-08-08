@@ -1,0 +1,18 @@
+{
+  "id": "minihub-quickpay-pass",
+  "name": "MiniHub QuickPay Pass",
+  "version": "1.0.0",
+  "entry": "index.html",
+  "framework": "vite",
+  "host": "flutter-super-app",
+  "permissions": [
+    "user.profile",
+    "payment.request",
+    "rewards.read",
+    "miniapp.close"
+  ],
+  "backend": {
+    "platformApi": "https://api.minihub.example",
+    "paymentApi": "https://pay.minihub.example"
+  }
+}

@@ -130,3 +130,24 @@ Align the GitHub repository name with the `theBuilderStudio` product identity.
 ### Result
 
 The canonical remote is now `https://github.com/theBuilderUni/TheFlutterBuilderStudioApp.git`. The Dart package remains `the_builder_studio`, the user-facing name remains `theBuilderStudio`, and the Android application ID remains `com.thebuilderuni.thebuilderstudio`.
+
+## 2026-08-08 — Add Bundled Mini App Host Demo
+
+### Decision
+
+Add a focused `mini_app_host` feature that opens a bundled Vite mini app inside Flutter WebView using the existing GetX route, binding, controller, and `BaseView` patterns.
+
+### Reason
+
+The demo validates a super-app style architecture without replacing the existing BuilderStudio shell or claiming production mini app marketplace behavior.
+
+### Result
+
+- `MiniAppHostController` owns WebView state, local asset-server startup, JavaScript bridge messages, and mock host actions.
+- `MiniAppAssetServer` serves `assets/mini_app` from a phone-local `127.0.0.1` URL.
+- The Vite mini app source is retained under `mini_apps/quickpay_pass`.
+- Bridge responses remain mock-only and do not perform real Rewards or backend operations.
+
+### Constraints
+
+Remote mini apps, manifest signing, permission enforcement, Supabase-backed Rewards operations, and production rollout rules are deferred until explicitly designed.
