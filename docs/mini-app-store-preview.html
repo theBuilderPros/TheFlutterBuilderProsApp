@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BuilderStudio Mini Apps Preview</title>
+    <style>
+      :root {
+        --bg: #f7f7fb;
+        --surface: #ffffff;
+        --text: #171717;
+        --muted: #565656;
+        --border: #e8e8ef;
+        --orange: #f57c00;
+        --violet: #6f48ff;
+        --teal: #1f8f8a;
+        --blue: #3f6fd8;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: #dfe4ea;
+        color: var(--text);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        display: grid;
+        place-items: center;
+      }
+
+      .phone {
+        width: 390px;
+        height: 844px;
+        background: var(--bg);
+        overflow: hidden;
+        border-radius: 34px;
+        box-shadow: 0 30px 80px rgba(23, 23, 23, 0.28);
+      }
+
+      .screen {
+        height: 100%;
+        overflow: auto;
+        padding: 18px 18px 30px;
+      }
+
+      .header,
+      .actions,
+      .search,
+      .row,
+      .tabs,
+      .shortcuts,
+      .categories,
+      .tile-meta {
+        display: flex;
+        align-items: center;
+      }
+
+      .header {
+        gap: 8px;
+      }
+
+      h1 {
+        flex: 1;
+        margin: 0;
+        font-size: 28px;
+        line-height: 1.1;
+      }
+
+      button,
+      .icon-button {
+        border: 0;
+        background: #f1f1f6;
+        color: var(--text);
+        font: inherit;
+      }
+
+      .icon-button {
+        width: 42px;
+        height: 42px;
+        display: grid;
+        place-items: center;
+        border-radius: 14px;
+      }
+
+      .icon-button.primary {
+        background: var(--orange);
+        color: white;
+      }
+
+      .search {
+        margin-top: 14px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 28px;
+        padding: 10px 8px 10px 14px;
+        gap: 10px;
+        box-shadow: 0 8px 18px rgba(35, 20, 72, 0.05);
+      }
+
+      .badge {
+        color: var(--orange);
+        background: rgba(245, 124, 0, 0.14);
+        border-radius: 99px;
+        padding: 6px 10px;
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      .search span:nth-child(2) {
+        flex: 1;
+        color: var(--muted);
+      }
+
+      .search button,
+      .hero button {
+        color: white;
+        background: var(--orange);
+        border-radius: 99px;
+        padding: 10px 14px;
+        font-weight: 800;
+      }
+
+      .hero {
+        margin-top: 14px;
+        display: flex;
+        gap: 16px;
+        padding: 18px;
+        border-radius: 24px;
+        color: white;
+        background: linear-gradient(135deg, var(--violet), #241a66);
+        box-shadow: 0 12px 26px rgba(35, 20, 72, 0.14);
+      }
+
+      .hero-copy {
+        flex: 1;
+      }
+
+      .pill {
+        display: inline-flex;
+        padding: 6px 10px;
+        border-radius: 99px;
+        background: rgba(255, 255, 255, 0.16);
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .hero h2 {
+        margin: 14px 0 8px;
+        font-size: 24px;
+      }
+
+      .hero p {
+        margin: 0 0 16px;
+        color: rgba(255, 255, 255, 0.88);
+        line-height: 1.35;
+      }
+
+      .hero-art {
+        position: relative;
+        width: 92px;
+        height: 116px;
+        border-radius: 24px;
+        background: white;
+        display: grid;
+        place-items: center;
+        color: var(--orange);
+        font-size: 36px;
+      }
+
+      .hero-art::after {
+        content: "\2713";
+        position: absolute;
+        top: 14px;
+        right: 12px;
+        width: 24px;
+        height: 24px;
+        border-radius: 999px;
+        display: grid;
+        place-items: center;
+        background: #eee9ff;
+        color: var(--violet);
+        font-size: 14px;
+        font-weight: 900;
+      }
+
+      .panel {
+        margin-top: 18px;
+        padding: 14px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 22px;
+      }
+
+      .tabs {
+        gap: 14px;
+      }
+
+      .tab {
+        flex: 1;
+        text-align: center;
+        color: var(--muted);
+        font-weight: 700;
+      }
+
+      .tab.active {
+        color: var(--orange);
+      }
+
+      .tab.active::after {
+        content: "";
+        display: block;
+        width: 56px;
+        height: 3px;
+        margin: 8px auto 0;
+        border-radius: 99px;
+        background: var(--orange);
+      }
+
+      .shortcuts {
+        justify-content: space-between;
+        margin-top: 16px;
+      }
+
+      .shortcut {
+        width: 62px;
+        text-align: center;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .shortcut i,
+      .category i,
+      .tile i {
+        width: 54px;
+        height: 54px;
+        margin: 0 auto 8px;
+        border-radius: 999px;
+        display: grid;
+        place-items: center;
+        font-style: normal;
+        font-size: 25px;
+      }
+
+      .categories {
+        height: 86px;
+        margin-top: 20px;
+        gap: 18px;
+        overflow: hidden;
+      }
+
+      .category {
+        width: 72px;
+        flex: 0 0 auto;
+        text-align: center;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .category.active {
+        color: var(--orange);
+      }
+
+      .category i {
+        width: 48px;
+        height: 48px;
+        border-radius: 16px;
+      }
+
+      .grid-panel {
+        margin-top: 22px;
+      }
+
+      h3 {
+        margin: 0 0 14px;
+        font-size: 20px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .tile {
+        min-height: 130px;
+        padding: 12px;
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        background: var(--bg);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .tile i {
+        margin: 0;
+        border-radius: 16px;
+      }
+
+      .tile strong,
+      .tile small {
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .tile strong {
+        font-size: 14px;
+      }
+
+      .tile small {
+        margin-top: 3px;
+        color: var(--muted);
+      }
+
+      .orange {
+        background: rgba(245, 124, 0, 0.12);
+        color: var(--orange);
+      }
+
+      .violet {
+        background: rgba(111, 72, 255, 0.12);
+        color: var(--violet);
+      }
+
+      .teal {
+        background: rgba(31, 143, 138, 0.12);
+        color: var(--teal);
+      }
+
+      .blue {
+        background: rgba(63, 111, 216, 0.12);
+        color: var(--blue);
+      }
+
+      .dark {
+        background: rgba(32, 36, 42, 0.1);
+        color: #20242a;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="phone" aria-label="BuilderStudio mini app store preview">
+      <section class="screen">
+        <header class="header">
+          <div class="icon-button">&lsaquo;</div>
+          <h1>Mini Apps</h1>
+          <div class="actions">
+            <div class="icon-button">&bull;&bull;&bull;</div>
+            <div class="icon-button primary">&#9678;</div>
+          </div>
+        </header>
+
+        <div class="search">
+          <span class="badge">New</span>
+          <span>Search Builder services</span>
+          <button>&#8981; Search</button>
+        </div>
+
+        <section class="hero">
+          <div class="hero-copy">
+            <span class="pill">BuilderStudio Mini App</span>
+            <h2>QuickPay Pass</h2>
+            <p>Open a fast local mini app for rewards and service actions.</p>
+            <button>&#9889; Open</button>
+          </div>
+          <div class="hero-art">&#9638;</div>
+        </section>
+
+        <section class="panel">
+          <div class="tabs">
+            <div class="tab active">&#8634; Recently Used</div>
+            <div class="tab">&#9825; My Favorites</div>
+          </div>
+          <div class="shortcuts">
+            <div class="shortcut"><i class="orange">&#9889;</i>QuickPay</div>
+            <div class="shortcut"><i class="violet">&#9733;</i>Reward ID</div>
+            <div class="shortcut"><i class="teal">&#9679;</i>Updates</div>
+            <div class="shortcut"><i class="blue">&#10003;</i>Evidence</div>
+            <div class="shortcut"><i class="dark">&#9638;</i>More</div>
+          </div>
+        </section>
+
+        <section class="categories">
+          <div class="category active"><i class="orange">&#10022;</i>For You</div>
+          <div class="category"><i class="blue">&#8962;</i>Learning</div>
+          <div class="category"><i class="violet">&#9635;</i>Rewards</div>
+          <div class="category"><i class="teal">&#8982;</i>Events</div>
+          <div class="category"><i class="dark">&#9672;</i>Services</div>
+        </section>
+
+        <section class="panel grid-panel">
+          <h3>What's New</h3>
+          <div class="grid">
+            <article class="tile">
+              <i class="orange">&#9889;</i>
+              <div><strong>QuickPay Pass</strong><small>Rewards action</small></div>
+            </article>
+            <article class="tile">
+              <i class="blue">&#10003;</i>
+              <div><strong>Evidence Studio</strong><small>Task proof</small></div>
+            </article>
+            <article class="tile">
+              <i class="teal">&#8962;</i>
+              <div><strong>Classroom Sync</strong><small>Learning hub</small></div>
+            </article>
+            <article class="tile">
+              <i class="violet">&#9733;</i>
+              <div><strong>Demo Day</strong><small>Showcase</small></div>
+            </article>
+          </div>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>

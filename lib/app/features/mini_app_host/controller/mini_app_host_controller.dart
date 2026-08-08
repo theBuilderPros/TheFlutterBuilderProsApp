@@ -13,12 +13,18 @@ class MiniAppHostController extends BaseController {
   final RxString hostStatus = 'Ready'.obs;
   final Rxn<Uri> miniAppUrl = Rxn<Uri>();
 
-  late final WebViewController webViewController;
+  WebViewController? _webViewController;
 
-  @override
-  void onInit() {
-    super.onInit();
-    webViewController = WebViewController()
+  WebViewController get webViewController {
+    final controller = _webViewController;
+    if (controller == null) {
+      throw StateError('Mini app WebView has not been opened yet.');
+    }
+    return controller;
+  }
+
+  WebViewController _ensureWebViewController() {
+    return _webViewController ??= WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..addJavaScriptChannel(
         'FlutterHost',
@@ -39,10 +45,11 @@ class MiniAppHostController extends BaseController {
     showLoading();
     try {
       final url = miniAppUrl.value ?? await _server.start();
+      final controller = _ensureWebViewController();
       miniAppUrl.value = url;
       hostStatus.value = 'QuickPay opened';
       miniAppOpen.value = true;
-      await webViewController.loadRequest(url);
+      await controller.loadRequest(url);
     } finally {
       hideLoading();
     }
@@ -54,11 +61,14 @@ class MiniAppHostController extends BaseController {
   }
 
   Future<void> reloadMiniApp() async {
-    await webViewController.reload();
+    await _webViewController?.reload();
   }
 
   Future<void> injectBridge() async {
-    await webViewController.runJavaScript('''
+    final controller = _webViewController;
+    if (controller == null) return;
+
+    await controller.runJavaScript('''
       window.SuperAppBridge = {
         call: function(action, payload) {
           return new Promise(function(resolve) {
@@ -77,6 +87,9 @@ class MiniAppHostController extends BaseController {
   }
 
   Future<void> handleBridgeMessage(JavaScriptMessage message) async {
+    final controller = _webViewController;
+    if (controller == null) return;
+
     final request = jsonDecode(message.message) as Map<String, dynamic>;
     final requestId = request['requestId'] as String;
     final action = request['action'] as String;
@@ -87,7 +100,7 @@ class MiniAppHostController extends BaseController {
     final response = await _runHostAction(action, payload);
     final encoded = jsonEncode(response);
 
-    await webViewController.runJavaScript('''
+    await controller.runJavaScript('''
       (function() {
         var callback = window.__superAppCallbacks && window.__superAppCallbacks['$requestId'];
         if (!callback) return;
