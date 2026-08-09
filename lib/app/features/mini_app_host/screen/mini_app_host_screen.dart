@@ -159,9 +159,9 @@ class _PromoSliderState extends State<_PromoSlider> {
 
   static const List<_MiniAppListing> _miniApps = [
     _MiniAppListing(
-      title: 'Skino Mini',
+      title: 'Quick Pay',
       tag: 'Featured',
-      description: 'Your blue mini app, opened inside BuilderStudio.',
+      description: 'Fast checkout and rewards access in one tap.',
       icon: Icons.bolt_rounded,
     ),
   ];
@@ -366,7 +366,7 @@ class _MiniAppAccessPanel extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'Skino Mini',
+                      'Quick Pay',
                       textAlign: TextAlign.center,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -454,7 +454,7 @@ class _MiniAppTopBar extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  'Skino Mini',
+                  'Quick Pay',
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 const SizedBox(height: 2),
