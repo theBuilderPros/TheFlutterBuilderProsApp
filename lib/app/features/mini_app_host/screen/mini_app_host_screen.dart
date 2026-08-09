@@ -177,7 +177,7 @@ class _PromoSliderState extends State<_PromoSlider> {
     return Column(
       children: [
         SizedBox(
-          height: 170,
+          height: 188,
           child: PageView.builder(
             controller: _pageController,
             itemCount: _miniApps.length,
@@ -255,6 +255,8 @@ class _PromoSlide extends StatelessWidget {
                   const SizedBox(height: 8),
                   Text(
                     miniApp.title,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                       fontWeight: FontWeight.w800,
                     ),
@@ -266,9 +268,9 @@ class _PromoSlide extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
-                  const SizedBox(height: 14),
+                  const SizedBox(height: 12),
                   SizedBox(
-                    height: 38,
+                    height: 36,
                     child: FilledButton(
                       onPressed: onOpen,
                       child: const Text('Open Mini App'),
