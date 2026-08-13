@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:the_builder_studio/app/constant/resources/app_colors.dart';
 import 'package:the_builder_studio/app/constant/resources/app_images.dart';
+import 'package:the_builder_studio/app/constant/routing/app_route.dart';
 import 'package:the_builder_studio/app/core/base/base_view.dart';
 import 'package:the_builder_studio/app/features/profile/controller/profile_controller.dart';
 
@@ -347,6 +348,46 @@ class _Apps extends GetView<ProfileController> {
           ),
         ),
         const SizedBox(height: 18),
+        _Card(
+          child: Row(
+            children: [
+              Container(
+                width: 48,
+                height: 48,
+                decoration: BoxDecoration(
+                  color: AppColors.violetSoft,
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                child: const Icon(
+                  Icons.account_balance_wallet_outlined,
+                  color: AppColors.violet,
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Wallet',
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      'Activate, receive, and send loyalty points.',
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                  ],
+                ),
+              ),
+              TextButton(
+                onPressed: () => Get.toNamed(Routes.wallet),
+                child: const Text('Open'),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 12),
         ...items.map(
           (s) => Padding(
             padding: const EdgeInsets.only(bottom: 12),
@@ -438,7 +479,7 @@ class _SquadCard extends GetView<ProfileController> {
   Widget build(BuildContext context) {
     final items = controller.itemsFor(squad.id);
     return _Card(
-          child: Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
@@ -589,8 +630,7 @@ class _Card extends StatelessWidget {
     child: ClipRRect(
       borderRadius: BorderRadius.circular(20),
       child: Column(
-        children: [Padding(padding: const EdgeInsets.all(16), child: child),
-        ],
+        children: [Padding(padding: const EdgeInsets.all(16), child: child)],
       ),
     ),
   );

@@ -1,0 +1,25 @@
+{
+  "businessProfile": {
+    "merchantName": "YOUR_MERCHANT_NAME"
+  },
+  "loyaltyProgram": {
+    "pointName": "YOUR_POINT_NAME",
+    "assetCode": "YOUR_ASSET_CODE",
+    "totalSupply": 1000000
+  },
+  "systemAccounts": {
+    "issuer": {
+      "publicKey": "YOUR_ISSUER_PUBLIC_KEY"
+    },
+    "distributor": {
+      "publicKey": "YOUR_DISTRIBUTOR_PUBLIC_KEY"
+    }
+  },
+  "network": {
+    "networkName": "Mainnet",
+    "horizonUrl": "https://xlm.nownodes.io",
+    "nownodeApiKey": "YOUR_NOWNODES_API_KEY"
+  },
+  "importSource": "Local Utilities",
+  "packageVersion": "1.0.0"
+}
