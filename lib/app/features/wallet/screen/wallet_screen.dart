@@ -4,9 +4,8 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:the_builder_studio/app/constant/resources/app_colors.dart';
 import 'package:the_builder_studio/app/constant/resources/app_string.dart';
 import 'package:the_builder_studio/app/core/base/base_view.dart';
-import 'package:the_builder_studio/app/design/talkware_radius.dart';
-import 'package:the_builder_studio/app/design/talkware_spacing.dart';
 import 'package:the_builder_studio/app/features/wallet/controller/wallet_controller.dart';
+import 'package:the_builder_studio/app/features/wallet/utility/wallet_ui_metrics.dart';
 
 class WalletScreen extends BaseView<WalletController> {
   const WalletScreen({super.key});
@@ -92,10 +91,10 @@ class _WalletHeader extends StatelessWidget {
       SafeArea(
         child: Material(
           borderRadius: const BorderRadius.vertical(
-            top: Radius.circular(TalkwareRadius.lg),
+            top: Radius.circular(WalletRadius.lg),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(TalkwareSpacing.lg),
+            padding: const EdgeInsets.all(WalletSpacing.lg),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [

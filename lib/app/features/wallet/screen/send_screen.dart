@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:the_builder_studio/app/constant/resources/app_string.dart';
 import 'package:the_builder_studio/app/core/base/base_view.dart';
-import 'package:the_builder_studio/app/design/talkware_spacing.dart';
 import 'package:the_builder_studio/app/features/wallet/controller/wallet_controller.dart';
+import 'package:the_builder_studio/app/features/wallet/utility/wallet_ui_metrics.dart';
 import 'package:the_builder_studio/app/widget/section_card.dart';
 
 class WalletSendScreen extends BaseView<WalletController> {
@@ -24,7 +24,7 @@ class WalletSendScreen extends BaseView<WalletController> {
           }
 
           return ListView(
-            padding: const EdgeInsets.all(TalkwareSpacing.lg),
+            padding: const EdgeInsets.all(WalletSpacing.lg),
             children: [
               SectionCard(
                 title: AppString.walletSendTitle,
@@ -40,7 +40,7 @@ class WalletSendScreen extends BaseView<WalletController> {
                         prefixIcon: Icon(Icons.account_balance_wallet_outlined),
                       ),
                     ),
-                    const SizedBox(height: TalkwareSpacing.sm),
+                    const SizedBox(height: WalletSpacing.sm),
                     InputDecorator(
                       decoration: const InputDecoration(
                         labelText: AppString.walletAssetReadonlyLabel,
@@ -48,7 +48,7 @@ class WalletSendScreen extends BaseView<WalletController> {
                       ),
                       child: Text(controller.assetCode),
                     ),
-                    const SizedBox(height: TalkwareSpacing.sm),
+                    const SizedBox(height: WalletSpacing.sm),
                     TextField(
                       controller: controller.amountController,
                       keyboardType: const TextInputType.numberWithOptions(
@@ -62,9 +62,9 @@ class WalletSendScreen extends BaseView<WalletController> {
                         prefixIcon: Icon(Icons.payments_outlined),
                       ),
                     ),
-                    const SizedBox(height: TalkwareSpacing.sm),
+                    const SizedBox(height: WalletSpacing.sm),
                     _ValidationStatus(controller: controller),
-                    const SizedBox(height: TalkwareSpacing.sm),
+                    const SizedBox(height: WalletSpacing.sm),
                     _ReviewButton(controller: controller),
                   ],
                 ),
@@ -103,7 +103,7 @@ class _ValidationStatus extends StatelessWidget {
                   ? Icons.check_circle_outline
                   : Icons.error_outline,
             ),
-          const SizedBox(width: TalkwareSpacing.sm),
+          const SizedBox(width: WalletSpacing.sm),
           Expanded(child: Text(message)),
         ],
       );
@@ -145,7 +145,7 @@ class _MessagePanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: const EdgeInsets.all(TalkwareSpacing.lg),
+      padding: const EdgeInsets.all(WalletSpacing.lg),
       children: [
         SectionCard(title: AppString.walletSendTitle, child: Text(message)),
       ],

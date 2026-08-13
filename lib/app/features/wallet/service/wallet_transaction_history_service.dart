@@ -4,7 +4,7 @@ import 'package:the_builder_studio/app/features/wallet/model/wallet_transaction_
 import 'package:shared_preferences/shared_preferences.dart';
 
 class WalletTransactionHistoryService {
-  static const String _historyKey = 'talkware.wallet.transaction_history';
+  static const String _historyKey = 'builder_studio.wallet.transaction_history';
 
   Future<List<WalletTransactionHistoryModel>> loadHistory() async {
     final preferences = await SharedPreferences.getInstance();

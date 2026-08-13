@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:the_builder_studio/app/constant/resources/app_string.dart';
 import 'package:the_builder_studio/app/core/base/base_view.dart';
-import 'package:the_builder_studio/app/design/talkware_spacing.dart';
 import 'package:the_builder_studio/app/features/wallet/controller/wallet_controller.dart';
 import 'package:the_builder_studio/app/features/wallet/model/wallet_transaction_history_model.dart';
+import 'package:the_builder_studio/app/features/wallet/utility/wallet_ui_metrics.dart';
 import 'package:the_builder_studio/app/widget/section_card.dart';
 
 class WalletTransactionHistoryScreen extends BaseView<WalletController> {
@@ -19,7 +19,7 @@ class WalletTransactionHistoryScreen extends BaseView<WalletController> {
           final records = controller.history;
           if (records.isEmpty) {
             return ListView(
-              padding: const EdgeInsets.all(TalkwareSpacing.lg),
+              padding: const EdgeInsets.all(WalletSpacing.lg),
               children: const [
                 SectionCard(
                   title: AppString.walletHistoryTitle,
@@ -30,10 +30,10 @@ class WalletTransactionHistoryScreen extends BaseView<WalletController> {
           }
 
           return ListView.separated(
-            padding: const EdgeInsets.all(TalkwareSpacing.lg),
+            padding: const EdgeInsets.all(WalletSpacing.lg),
             itemBuilder: (_, index) => _HistoryTile(record: records[index]),
             separatorBuilder: (_, _) =>
-                const SizedBox(height: TalkwareSpacing.sm),
+                const SizedBox(height: WalletSpacing.sm),
             itemCount: records.length,
           );
         }),
@@ -122,12 +122,12 @@ class _Detail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: TalkwareSpacing.sm),
+      padding: const EdgeInsets.only(bottom: WalletSpacing.sm),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(label, style: Theme.of(context).textTheme.labelLarge),
-          const SizedBox(height: TalkwareSpacing.xs),
+          const SizedBox(height: WalletSpacing.xs),
           SelectableText(value),
         ],
       ),

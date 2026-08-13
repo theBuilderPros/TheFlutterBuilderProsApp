@@ -6,9 +6,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class WalletActivationStorageService {
   static const String _walletAccessKey =
-      'talkware.wallet.persisted_wallet_access';
+      'builder_studio.wallet.persisted_wallet_access';
   static const String _encryptedSecretKey =
-      'talkware.wallet.encrypted_customer_secret';
+      'builder_studio.wallet.encrypted_customer_secret';
 
   Future<CustomerWalletAccess?> restoreWalletAccess() async {
     final preferences = await SharedPreferences.getInstance();

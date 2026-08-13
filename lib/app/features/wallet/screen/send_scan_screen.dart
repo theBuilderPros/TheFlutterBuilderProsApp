@@ -5,9 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:the_builder_studio/app/constant/resources/app_string.dart';
 import 'package:the_builder_studio/app/core/base/base_view.dart';
-import 'package:the_builder_studio/app/design/talkware_radius.dart';
-import 'package:the_builder_studio/app/design/talkware_spacing.dart';
 import 'package:the_builder_studio/app/features/wallet/controller/wallet_controller.dart';
+import 'package:the_builder_studio/app/features/wallet/utility/wallet_ui_metrics.dart';
 import 'package:the_builder_studio/app/widget/section_card.dart';
 
 class WalletSendScanScreen extends BaseView<WalletController> {
@@ -19,7 +18,7 @@ class WalletSendScanScreen extends BaseView<WalletController> {
       appBar: AppBar(title: const Text(AppString.walletScanQrTitle)),
       body: SafeArea(
         child: ListView(
-          padding: const EdgeInsets.all(TalkwareSpacing.lg),
+          padding: const EdgeInsets.all(WalletSpacing.lg),
           children: [_QrScannerPanel(controller: controller)],
         ),
       ),
@@ -159,7 +158,7 @@ class _QrScannerPanelState extends State<_QrScannerPanel>
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(TalkwareRadius.md),
+            borderRadius: BorderRadius.circular(WalletRadius.md),
             child: AspectRatio(
               aspectRatio: 1,
               child: MobileScanner(
@@ -172,7 +171,7 @@ class _QrScannerPanelState extends State<_QrScannerPanel>
               ),
             ),
           ),
-          const SizedBox(height: TalkwareSpacing.sm),
+          const SizedBox(height: WalletSpacing.sm),
           Row(
             children: [
               Expanded(child: Text(_status)),

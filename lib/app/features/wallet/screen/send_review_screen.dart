@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:the_builder_studio/app/constant/resources/app_string.dart';
 import 'package:the_builder_studio/app/core/base/base_view.dart';
-import 'package:the_builder_studio/app/design/talkware_spacing.dart';
 import 'package:the_builder_studio/app/features/wallet/controller/wallet_controller.dart';
+import 'package:the_builder_studio/app/features/wallet/utility/wallet_ui_metrics.dart';
 import 'package:the_builder_studio/app/widget/section_card.dart';
 
 class WalletSendReviewScreen extends BaseView<WalletController> {
@@ -16,7 +16,7 @@ class WalletSendReviewScreen extends BaseView<WalletController> {
       body: SafeArea(
         child: Obx(
           () => ListView(
-            padding: const EdgeInsets.all(TalkwareSpacing.lg),
+            padding: const EdgeInsets.all(WalletSpacing.lg),
             children: [
               SectionCard(
                 title: AppString.walletReviewTitle,
@@ -39,14 +39,14 @@ class WalletSendReviewScreen extends BaseView<WalletController> {
                       label: AppString.walletNetworkLabel,
                       value: controller.networkName,
                     ),
-                    const SizedBox(height: TalkwareSpacing.sm),
+                    const SizedBox(height: WalletSpacing.sm),
                     if (!controller.isWalletUnlocked)
                       OutlinedButton.icon(
                         onPressed: controller.unlockWalletForSend,
                         icon: const Icon(Icons.lock_open_outlined),
                         label: const Text(AppString.walletUnlockButton),
                       ),
-                    const SizedBox(height: TalkwareSpacing.sm),
+                    const SizedBox(height: WalletSpacing.sm),
                     FilledButton.icon(
                       onPressed: controller.isSubmittingSend.value
                           ? null
@@ -80,12 +80,12 @@ class _ReviewRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: TalkwareSpacing.sm),
+      padding: const EdgeInsets.only(bottom: WalletSpacing.sm),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(label, style: Theme.of(context).textTheme.labelLarge),
-          const SizedBox(height: TalkwareSpacing.xs),
+          const SizedBox(height: WalletSpacing.xs),
           SelectableText(
             value.isEmpty ? AppString.walletUnavailableValue : value,
           ),
