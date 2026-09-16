@@ -80,4 +80,4 @@ All derived assets preserve the complete supplied text logo and aspect ratio. Sq
 
 ## Publication status
 
-The repository has been renamed, the local remote is correct, and the verified rebrand source is prepared for publication to remote `main`.
+The repository has been renamed, the local remote is correct, and rebrand commit `5793421` was pushed to remote `main`. GitHub reported that the repository rule requiring pull requests was bypassed for this direct administrative push; branch protection should be reviewed before future changes.
