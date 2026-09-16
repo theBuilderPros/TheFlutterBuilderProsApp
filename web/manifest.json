@@ -1,11 +1,11 @@
 {
-    "name": "theBuilderStudio",
-    "short_name": "theBuilderStudio",
+    "name": "theBuilderPros",
+    "short_name": "theBuilderPros",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#F4F2F1",
     "theme_color": "#5B20E5",
-    "description": "The Builder Uni mobile studio for Builders, Rewards, Apps, and work updates.",
+    "description": "theBuilderPros mobile experience for Builders, Rewards, Apps, and work updates.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

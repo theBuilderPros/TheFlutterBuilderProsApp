@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:the_builder_studio/app/core/base/base_controller.dart';
+import 'package:the_builder_pros/app/core/base/base_controller.dart';
 
 class ProfileController extends BaseController {
   final tabIndex = 0.obs;
@@ -10,7 +10,7 @@ class ProfileController extends BaseController {
 
   final builder = const BuilderProfile(
     'Jordan Rivers',
-    'jordan@thebuilderuni.com',
+    'jordan@example.com',
     'Builder II',
   );
   final balance = '85.00';
@@ -19,7 +19,7 @@ class ProfileController extends BaseController {
   final squads = const [
     Squad(
       'squad-1',
-      'Builder Uni Mobile',
+      'theBuilderPros Mobile',
       'The mobile companion for following App Squads, viewing work updates, and managing Builder Rewards.',
       'Active',
       0xFFF35A12,
@@ -58,7 +58,7 @@ class ProfileController extends BaseController {
     WorkItem(
       'squad-1',
       'Ship Google Sign-In',
-      'Builders can securely access Builder Uni Mobile with Google.',
+      'Builders can securely access theBuilderPros Mobile with Google.',
       'Done',
       2,
       3,

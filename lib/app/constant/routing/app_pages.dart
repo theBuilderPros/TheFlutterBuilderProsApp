@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:the_builder_studio/app/constant/routing/app_route.dart';
-import 'package:the_builder_studio/app/features/profile/binding/profile_binding.dart';
-import 'package:the_builder_studio/app/features/profile/screen/profile_screen.dart';
+import 'package:the_builder_pros/app/constant/routing/app_route.dart';
+import 'package:the_builder_pros/app/features/profile/binding/profile_binding.dart';
+import 'package:the_builder_pros/app/features/profile/screen/profile_screen.dart';
 
 class AppPages {
   AppPages._();

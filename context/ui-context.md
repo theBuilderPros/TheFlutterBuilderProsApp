@@ -2,7 +2,7 @@
 
 ## Direction
 
-theBuilderStudio uses a restrained, professional mobile visual language inspired by clear professional-network products while retaining the Builder Uni logo palette.
+theBuilderPros uses a restrained, professional mobile visual language inspired by clear professional-network products while retaining the theBuilderPros logo palette.
 
 The current interface is light mode only.
 
@@ -39,7 +39,7 @@ Avoid large orange or violet backgrounds. Avoid dim/gray text. Avoid decorative 
 
 ### Page Header
 
-- official stacked Builder Uni logo on the left
+- official stacked theBuilderPros logo on the left
 - notification control on the right
 - page title and subtitle
 - a left-aligned underline at about 32% of content width

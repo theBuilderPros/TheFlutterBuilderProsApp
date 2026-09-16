@@ -66,7 +66,7 @@ When changing architecture, product scope, design rules, data contracts, or veri
 
 ## Git Rules
 
-- canonical remote: `https://github.com/theBuilderUni/TheFlutterBuilderStudioApp.git`
+- canonical remote: `https://github.com/theBuilderPros/TheFlutterBuilderProsApp.git`
 - primary branch: `main`
 - inspect status/diff before staging
 - keep commits focused

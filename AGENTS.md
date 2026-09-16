@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This repository contains **theBuilderStudio**, the Flutter mobile companion for The Builder Uni. It is a Builder-facing visibility layer for profile, Rewards, App discovery, and App Squad work updates.
+This repository contains **theBuilderPros**, the Flutter mobile companion for theBuilderPros. It is a Builder-facing visibility layer for profile, Rewards, App discovery, and App Squad work updates.
 
 The current runtime is a UI-first prototype backed by local mock data. Authentication, Supabase reads, live Rewards operations, and desktop Workspace synchronization are not implemented yet.
 
@@ -31,7 +31,7 @@ Implemented with mock data:
 - App Squad detail with WIP, Committed Work, and Work History
 - follow/unfollow presentation state
 - three-tab bottom navigation
-- official Builder Uni logo, web favicon, and Android launcher icons
+- official theBuilderPros logo, web favicon, and Android launcher icons
 
 Not implemented:
 
@@ -74,7 +74,7 @@ Work Items are independent records. App association belongs to `squad_work_item`
 - Use violet for selected navigation, supporting badges, focus states, and small brand accents.
 - Do not add colored top strips to cards.
 - The short page-title underline is approximately one-third width, mostly orange with a small violet ending.
-- Preserve the official Builder Uni logo and launcher artwork.
+- Preserve the official theBuilderPros logo and launcher artwork.
 
 ## Verification
 
@@ -96,7 +96,7 @@ Do not combine test and build commands into a single long shell invocation becau
 
 ## Git
 
-- Canonical repository: `https://github.com/theBuilderUni/TheFlutterBuilderStudioApp.git`
+- Canonical repository: `https://github.com/theBuilderPros/TheFlutterBuilderProsApp.git`
 - Primary branch: `main`
 - Keep commits focused and keep the working tree clean before publishing.
 - Never rewrite shared history or force-push unless the user explicitly requests it.

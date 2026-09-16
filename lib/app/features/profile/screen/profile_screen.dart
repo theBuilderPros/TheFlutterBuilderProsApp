@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:the_builder_studio/app/constant/resources/app_colors.dart';
-import 'package:the_builder_studio/app/constant/resources/app_images.dart';
-import 'package:the_builder_studio/app/core/base/base_view.dart';
-import 'package:the_builder_studio/app/features/profile/controller/profile_controller.dart';
+import 'package:the_builder_pros/app/constant/resources/app_colors.dart';
+import 'package:the_builder_pros/app/constant/resources/app_images.dart';
+import 'package:the_builder_pros/app/core/base/base_view.dart';
+import 'package:the_builder_pros/app/features/profile/controller/profile_controller.dart';
 
 class ProfileScreen extends BaseView<ProfileController> {
   const ProfileScreen({super.key});
@@ -92,7 +92,7 @@ class _Header extends StatelessWidget {
   Widget build(BuildContext context) => Row(
     children: [
       Image.asset(
-        AppImages.logo,
+        AppImages.theBuilderProsLogo,
         height: 58,
         width: 100,
         fit: BoxFit.contain,
@@ -438,7 +438,7 @@ class _SquadCard extends GetView<ProfileController> {
   Widget build(BuildContext context) {
     final items = controller.itemsFor(squad.id);
     return _Card(
-          child: Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
@@ -589,8 +589,7 @@ class _Card extends StatelessWidget {
     child: ClipRRect(
       borderRadius: BorderRadius.circular(20),
       child: Column(
-        children: [Padding(padding: const EdgeInsets.all(16), child: child),
-        ],
+        children: [Padding(padding: const EdgeInsets.all(16), child: child)],
       ),
     ),
   );

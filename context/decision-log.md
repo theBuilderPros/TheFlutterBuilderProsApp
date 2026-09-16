@@ -1,6 +1,6 @@
 # Decision Log
 
-This log records current decisions that materially shape theBuilderStudio. Superseded weekly/Talkware history was removed because it did not describe this repository.
+This log records current decisions that materially shape theBuilderPros. Superseded weekly/Talkware history was removed because it did not describe this repository.
 
 ## 2026-07-12 — Reset as theBuilderStudio
 
@@ -130,3 +130,23 @@ Align the GitHub repository name with the `theBuilderStudio` product identity.
 ### Result
 
 The canonical remote is now `https://github.com/theBuilderUni/TheFlutterBuilderStudioApp.git`. The Dart package remains `the_builder_studio`, the user-facing name remains `theBuilderStudio`, and the Android application ID remains `com.thebuilderuni.thebuilderstudio`.
+
+## 2026-09-16 - Rebrand to theBuilderPros
+
+### Decision
+
+Rename the current product and checked-in platform identities from theBuilderStudio to `theBuilderPros`.
+
+### Result
+
+- Dart package: `the_builder_pros`
+- Android namespace/application ID: `com.thebuilderpros.thebuilderpros`
+- iOS/macOS bundle ID: `com.thebuilderpros.thebuilderpros`
+- Linux application ID: `com.thebuilderpros.thebuilderpros`
+- desktop binary: `the_builder_pros`
+- primary logo: `assets/images/the_builder_pros_logo.png`
+- target repository: `https://github.com/theBuilderPros/TheFlutterBuilderProsApp.git`
+
+The supplied horizontal text logo is used as-is. Derived square platform assets preserve the full wordmark and its aspect ratio with padding; no replacement monogram is used. User-facing text uses `theBuilderPros`, while the supplied logo artwork retains its original visual casing.
+
+Legal owner, production email/domain, app-store registration, release signing, and external account configuration remain separate approvals and must not be invented in source.

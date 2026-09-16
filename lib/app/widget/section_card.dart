@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:the_builder_studio/app/constant/resources/app_dimens.dart';
+import 'package:the_builder_pros/app/constant/resources/app_dimens.dart';
 
 class SectionCard extends StatelessWidget {
   const SectionCard({super.key, required this.title, required this.child});

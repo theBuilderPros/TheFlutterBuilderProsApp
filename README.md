@@ -1,8 +1,8 @@
-# FlutterBuilderStudio App
+# theBuilderPros App
 
-FlutterBuilderStudio App is The Builder Uni mobile companion for Builders. It provides a focused mobile view of Builder identity, Builder Rewards, followed Apps, and the work being shipped by App Squads.
+theBuilderPros App is theBuilderPros mobile companion for Builders. It provides a focused mobile view of Builder identity, Builder Rewards, followed Apps, and the work being shipped by App Squads.
 
-Repository: https://github.com/theBuilderUni/TheFlutterBuilderStudioApp
+Repository: https://github.com/theBuilderPros/TheFlutterBuilderProsApp
 
 ## Current status
 
@@ -66,7 +66,7 @@ The six Builder Cycle week labels are Download, Listen, Emerge, Experiment, Impl
 
 ## Design system
 
-The UI uses The Builder Uni logo and brand palette in a restrained professional layout:
+The UI uses theBuilderPros logo and brand palette in a restrained professional layout:
 
 - white cards and navigation surfaces
 - neutral light page background
@@ -76,15 +76,15 @@ The UI uses The Builder Uni logo and brand palette in a restrained professional 
 - neutral borders, rounded controls, and subtle shadows
 - no decorative colored strips on cards
 
-Core design resources live in `lib/app/constant/resources/`. Android launcher icons and the web favicon use the official Builder Uni logo.
+Core design resources live in `lib/app/constant/resources/`. Android launcher icons and the web favicon use the official theBuilderPros logo.
 
 ## Technical identity
 
 | Setting | Value |
 | --- | --- |
-| Product name | `theBuilderStudio` |
-| Dart package | `the_builder_studio` |
-| Android application ID | `com.thebuilderuni.thebuilderstudio` |
+| Product name | `theBuilderPros` |
+| Dart package | `the_builder_pros` |
+| Android application ID | `com.thebuilderpros.thebuilderpros` |
 | Version | `1.0.0+1` |
 | Primary branch | `main` |
 
@@ -120,7 +120,7 @@ The current prototype is consolidated in `ProfileScreen` and `ProfileController`
 The intended direction is a shared Supabase backend used by the Electron Builder Workspace and the Flutter studio app:
 
 ```text
-Electron Builder Workspace        FlutterBuilderStudio App
+Electron Builder Workspace        theBuilderPros App
           |                                  |
        supabase-js                     supabase_flutter
           |                                  |
@@ -147,8 +147,8 @@ Requirements:
 - Android Studio or another configured Flutter target
 
 ```powershell
-git clone https://github.com/theBuilderUni/TheFlutterBuilderStudioApp.git
-cd TheFlutterBuilderStudioApp
+git clone https://github.com/theBuilderPros/TheFlutterBuilderProsApp.git
+cd TheFlutterBuilderProsApp
 flutter pub get
 flutter devices
 flutter run
@@ -177,4 +177,4 @@ build/app/outputs/flutter-apk/app-debug.apk
 
 ## Related system
 
-The Electron Builder Workspace owns coordination and work execution workflows such as creating and managing Work Items. FlutterBuilderStudio App remains intentionally mobile-focused and read-oriented so Builders can follow Apps, review work updates, and access Rewards without reproducing the full desktop Workspace.
+The Electron Builder Workspace owns coordination and work execution workflows such as creating and managing Work Items. theBuilderPros App remains intentionally mobile-focused and read-oriented so Builders can follow Apps, review work updates, and access Rewards without reproducing the full desktop Workspace.

@@ -1,12 +1,12 @@
 # Current State
 
-Last synchronized: 2026-07-13
+Last synchronized: 2026-09-16
 
 ## Branch Truth
 
-`main` is the current product branch for theBuilderStudio. This repository is no longer the old Week 1 profile challenge and does not use the inherited weekly branch narrative.
+`main` is the current product branch for theBuilderPros. This repository is no longer the old Week 1 profile challenge and does not use the inherited weekly branch narrative.
 
-Canonical repository: `https://github.com/theBuilderUni/TheFlutterBuilderStudioApp.git`
+Canonical repository: `https://github.com/theBuilderPros/TheFlutterBuilderProsApp.git`
 
 ## Runtime Truth
 
@@ -47,16 +47,16 @@ The current app has no persistence or external data source. The following are pl
 
 ## Platform Branding
 
-- Dart package: `the_builder_studio`
-- Android application ID: `com.thebuilderuni.thebuilderstudio`
-- product name: `theBuilderStudio` / theBuilderStudio
-- official logo: `assets/images/the_builder_uni_logo.png`
+- Dart package: `the_builder_pros`
+- Android application ID: `com.thebuilderpros.thebuilderpros`
+- product name: `theBuilderPros` / theBuilderPros
+- official logo: `assets/images/the_builder_pros_logo.png`
 - Android launcher icons: branded density-specific PNGs
-- web favicon: official Builder Uni logo
+- web favicon: official theBuilderPros logo
 
 ## Verification Status
 
-The current implementation has passed:
+The rebranded implementation passed on 2026-09-16:
 
 - `flutter analyze`
 - `flutter test test\widget_test.dart --reporter expanded`

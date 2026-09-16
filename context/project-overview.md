@@ -2,7 +2,7 @@
 
 ## Product
 
-theBuilderStudio is The Builder Uni mobile companion. It is intentionally smaller than the Electron Builder Workspace: the desktop product coordinates and executes work, while mobile provides a convenient Builder-facing view of identity, Rewards, Apps, and App Squad progress.
+theBuilderPros is theBuilderPros mobile companion. It is intentionally smaller than the Electron Builder Workspace: the desktop product coordinates and executes work, while mobile provides a convenient Builder-facing view of identity, Rewards, Apps, and App Squad progress.
 
 ## Users
 
@@ -64,7 +64,7 @@ Work Items remain independent from Builders and Apps. Link tables represent part
 
 - all reference mobile screens exist in Flutter
 - navigation and presentation interactions work with mocks
-- Builder Uni branding is consistent and restrained
+- theBuilderPros branding is consistent and restrained
 - terminology aligns with the Workspace data model
 - architecture remains ready for service-backed integration
 - documentation does not claim unimplemented behavior
