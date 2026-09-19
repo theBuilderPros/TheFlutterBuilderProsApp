@@ -1,0 +1,35 @@
+sequenceDiagram
+    participant Facade as WalletSdk
+    participant QR as ActivationQrCodec
+    participant Policy as ActivationPolicy
+    participant XDR as TransactionInspector
+    participant Secure as CredentialStore
+    participant Signer as SignatureService
+    participant HTTP as HorizonHttpClient
+    participant Store as ActivationStore
+    participant Reconcile as ActivationReconciler
+    participant Config as ConfigurationService
+
+    Facade->>QR: decodeAndValidateResponse(qrValue)
+    QR-->>Facade: Bound response and envelope
+    Facade->>Policy: validateBindingExpiryReplay(response)
+    Policy-->>Facade: Binding accepted
+    Facade->>XDR: decodeAndInspect(envelope)
+    XDR-->>Facade: Exact operations and signatures
+    Facade->>Policy: validateActivationContract(details)
+    Policy-->>Facade: Safe ActivationReview
+    Note over Facade: Application obtains explicit Builder approval
+    Facade->>Secure: readBuilderCredential(requestId)
+    Secure-->>Facade: Protected signing handle
+    Facade->>Signer: addBuilderSignature(envelope, handle)
+    Signer-->>Facade: Completed envelope and hash
+    Facade->>Store: saveSubmitting(hash, expiry)
+    Facade->>HTTP: POST /transactions with tx envelope
+    HTTP-->>Facade: Submission response
+    Facade->>Reconcile: verifyActivation(hash, expectedState)
+    Reconcile-->>Facade: Verified outcome
+    Facade->>Config: Decrypt, validate, and health-check NOWNodes configuration
+    Config-->>Facade: Configuration ready
+    Facade->>Store: Commit provider configuration
+    Facade->>Store: commitActivated()
+    Facade-->>Facade: Return ActivationOutcome

@@ -1,74 +1,65 @@
 # AI Workflow Rules
 
-## Required Reading
+## Context Routing
 
-Before meaningful changes, read:
+Always read `AGENTS.md`, then read the context files relevant to the task:
 
-1. `AGENTS.md`
-2. `context/current-state.md`
-3. `context/project-overview.md`
-4. `context/architecture.md`
-5. `context/code-standards.md`
-6. `context/ui-context.md`
-7. `context/progress-tracker.md`
-8. `context/decision-log.md`
+- Product purpose, scope, or terminology: `project-overview.md`
+- Current implementation or capability claims: `current-state.md`
+- Structure, dependencies, or technical boundaries: `architecture.md`
+- Dart, Flutter, GetX, naming, or testing conventions: `code-standards.md`
+- Visual or interaction design: `ui-context.md`
+- Prior decisions and rationale: `decision-log.md`
+- Completed work or active backlog: `progress-tracker.md`
 
-Use current state as implementation truth and verify it against code when facts may have drifted.
+Read all context files for broad product, architecture, or cross-cutting work. Verify volatile facts against the code and tests.
 
 ## Scope Discipline
 
-- Do not restore the old Week 1/Week 2 training narrative.
-- Do not claim Google Sign-In, Classroom, Supabase, persistence, or real Rewards behavior unless implemented and verified.
-- UI-only requests do not authorize backend or security-sensitive logic.
-- Logic requests should introduce typed service boundaries rather than embedding calls in widgets.
+- Keep work within the requested scope.
+- Do not introduce unrelated training or product narratives.
+- Do not claim authentication, backend integration, persistence, notifications, or real Rewards behavior unless implemented and verified.
+- A UI request does not authorize backend or security-sensitive implementation.
+- Introduce typed service boundaries for data or integration work instead of embedding calls in widgets.
 - Preserve Builder Workspace domain terminology.
 
-## Implementation Rules
+## Implementation
 
-- Preserve Flutter, GetX, base abstractions, bindings, centralized routes, and resources unless explicitly changing architecture.
-- New capabilities should use focused feature files/modules.
-- Do not expand the already broad prototype screen/controller with unrelated production logic.
+- Preserve Flutter, GetX, base abstractions, bindings, centralized routes, and shared resources unless the task explicitly changes the architecture.
+- Put new capabilities in focused feature modules.
+- Do not expand an already broad feature with unrelated production logic.
 - Keep credentials and secrets out of source control and client UI.
-- Update context when implementation truth changes.
+- Update the context file that owns any implementation truth changed by the work.
 
-## UI Rules
+## Verification
 
-- Maintain white surfaces, neutral background, black text, orange primary actions, and restrained violet support.
-- Do not add colored strips to cards.
-- Do not use gray/dim typography without explicit user direction.
-- Preserve the short mixed-color page-title underline and official logo assets.
-- Prefer centralized tokens over new hardcoded design values.
-
-## Verification Rules
-
-Run relevant commands independently:
+Run relevant checks independently. The default full-project checks are:
 
 ```powershell
 flutter pub get
 flutter analyze
-flutter test test\widget_test.dart --reporter expanded
+flutter test
 ```
 
-Use `flutter build apk --debug` only when an Android artifact or native-resource verification is relevant.
+Use targeted tests while diagnosing a failure, but run the full relevant suite before reporting completion. Use `flutter build apk --debug` when Android packaging or native resources are affected.
 
-If a command times out, do not report it as a test failure without test output. Re-run the specific command independently and report the actual result.
+If a command times out, rerun it independently. Do not report a timeout as a test failure without test output.
 
-## Documentation Rules
+## Documentation
 
-Documentation must distinguish:
+Keep each fact in its owning context file instead of copying it across several documents. Use links when another document needs the information.
 
+Documentation must distinguish among:
+
+- intended product behavior
 - implemented runtime behavior
-- mock/presentation behavior
-- planned integration
-- explicit non-goals
+- mock or presentation behavior
+- planned work
+- explicit product boundaries
 
-When changing architecture, product scope, design rules, data contracts, or verification workflow, synchronize the relevant context files in the same change.
+## Git
 
-## Git Rules
-
-- canonical remote: `https://github.com/theBuilderPros/TheFlutterBuilderProsApp.git`
-- primary branch: `main`
-- inspect status/diff before staging
-- keep commits focused
-- do not force-push or rewrite shared history without explicit instruction
-- do not publish unrelated user changes
+- Inspect status and diff before staging.
+- Keep commits focused.
+- Do not publish unrelated user changes.
+- Do not rewrite shared history or force-push without explicit instruction.

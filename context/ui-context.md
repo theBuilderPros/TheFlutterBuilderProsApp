@@ -2,22 +2,20 @@
 
 ## Direction
 
-theBuilderPros uses a restrained, professional mobile visual language inspired by clear professional-network products while retaining the theBuilderPros logo palette.
-
-The current interface is light mode only.
+theBuilderPros uses a restrained, professional mobile visual language with the official orange and violet brand palette. The interface currently supports light mode.
 
 ## Visual Hierarchy
 
-- neutral light page background
-- white cards, fields, and bottom navigation
-- black primary and secondary typography
-- neutral borders and subtle shadows
-- orange for primary actions and focused emphasis
-- violet for selected navigation, focus states, supporting badges, and small accent slices
+- Neutral light page background
+- White cards, fields, and navigation surfaces
+- Black primary and secondary typography
+- Neutral borders and subtle shadows
+- Orange for primary actions and focused emphasis
+- Violet for selection, focus, supporting badges, and small accents
 
-Avoid large orange or violet backgrounds. Avoid dim/gray text. Avoid decorative colored strips on cards.
+Avoid large orange or violet backgrounds, dim text, and decorative colored strips on cards.
 
-## Current Tokens
+## Tokens
 
 | Role | Token | Value |
 | --- | --- | --- |
@@ -31,61 +29,62 @@ Avoid large orange or violet backgrounds. Avoid dim/gray text. Avoid decorative 
 | Text | `AppColors.textPrimary` / `textSecondary` | `#000000` |
 | Border | `AppColors.border` | `#DED9E8` |
 
+The code is authoritative for token values. Update this table when shared tokens change.
+
 ## Typography
 
-`AppTheme` declares Inter as the app family and uses bold, black headings with black body/label text. If custom font files are later bundled, configure them in `pubspec.yaml`; do not assume a declared family is embedded when it is not.
+`AppTheme` declares Inter as the application font family and uses bold black headings with black body and label text. Inter font files are not currently bundled; declaring a family does not embed it. Add and configure font assets before relying on Inter in production.
 
 ## Components
 
 ### Page Header
 
-- official stacked theBuilderPros logo on the left
-- notification control on the right
-- page title and subtitle
-- a left-aligned underline at about 32% of content width
-- underline is mostly orange with a small violet ending
+- Official horizontal theBuilderPros wordmark on the left
+- Notification control on the right
+- Page title and subtitle
+- Left-aligned underline at approximately 32% of the content width
+- Underline is mostly orange with a small violet ending
 
 ### Cards
 
-- white surface
-- 20px current runtime radius
-- neutral border
-- subtle shadow
-- no orange, violet, or per-App top strip
+- White surface
+- Neutral border
+- Subtle shadow
+- No orange, violet, or per-App decorative top strip
+
+Wallet and Profile cards use the global Material `Card` theme with a 24 px corner radius. Specialized inner surfaces may use a smaller radius when their local component design requires it.
 
 ### Navigation
 
-- white Material 3 bottom NavigationBar
-- violet selected indicator on a violet-soft pill
-- Home, Rewards, Apps
-- hidden while App Detail is open
+- Rewards remains the initial route and there is no bottom navigation.
+- Mock Builder Rewards and App Master surfaces link through explicit role-switch controls.
+- The App Master role switch is for dual-role prototype testing and is not production authorization.
+- Builder screens and normal App Master flows use plain Rewards language. App
+  Master Advanced may show the masked NOWNodes endpoint/API-key configuration,
+  rotation version, and safe service status. All processing and persistence remain
+  inside the Wallet SDK.
 
 ### Buttons and Inputs
 
-- primary filled action: orange with white text
-- outlined/supporting action: violet/neutral
-- input surface: white
-- focused border: violet
-- stadium/pill treatment for primary themed buttons
+- Primary filled action: orange with white text
+- Outlined or supporting action: violet and neutral styling
+- Input surface: white
+- Focused border: violet
+- Stadium treatment for primary themed buttons
 
 ### Badges
 
-- orange-soft status badges for general status
-- violet-soft badges for following/level/count support
-- keep badge usage compact
-
-## Screen Inventory
-
-- Home: profile card, balance card, followed Apps
-- Rewards: balance, segmented Receive/Send, QR placeholder, Reward ID, send fields
-- Apps: search and App cards
-- App Detail: overview, follow action, WIP, Committed Work, Work History
+- Orange-soft for general status
+- Violet-soft for selection, verification, and count support
+- Compact use only
 
 ## Accessibility and Responsiveness
 
-- preserve strong black text contrast
-- keep tap targets large enough for touch
-- respect SafeArea
-- use scrolling layouts for compact devices
-- add semantic labels and real form validation during logic integration
-- test overflow on narrow devices before release
+- Preserve strong text contrast.
+- Keep touch targets appropriately sized.
+- Respect `SafeArea`.
+- Use scrolling layouts on compact devices.
+- Add semantic labels and real validation with production interactions.
+- Test overflow on narrow devices.
+
+Screen availability and current behavior belong in `current-state.md`.

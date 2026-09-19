@@ -2,101 +2,67 @@
 
 ## Purpose
 
-This repository contains **theBuilderPros**, the Flutter mobile companion for theBuilderPros. It is a Builder-facing visibility layer for profile, Rewards, App discovery, and App Squad work updates.
+This file defines the general working rules for the entire repository. Detailed product, architecture, design, and implementation guidance belongs in `context/` and should not be duplicated here.
 
-The current runtime is a UI-first prototype backed by local mock data. Authentication, Supabase reads, live Rewards operations, and desktop Workspace synchronization are not implemented yet.
+## Context Files
 
-## Required Context
+Use the context files relevant to the task:
 
-Read these files before architectural or implementation work:
+- `context/project-overview.md`: product purpose, scope, and domain language
+- `context/current-state.md`: current runtime behavior and implementation status
+- `context/architecture.md`: stack, structure, boundaries, and technical direction
+- `context/code-standards.md`: Dart, Flutter, GetX, testing, and naming conventions
+- `context/ui-context.md`: visual system and UI rules
+- `context/decision-log.md`: important decisions and their rationale
+- `context/progress-tracker.md`: active and completed work
+- `context/ai-workflow-rules.md`: detailed implementation and documentation workflow
 
-1. `context/current-state.md`
-2. `context/project-overview.md`
-3. `context/architecture.md`
-4. `context/code-standards.md`
-5. `context/ui-context.md`
-6. `context/progress-tracker.md`
-7. `context/decision-log.md`
-8. `context/ai-workflow-rules.md`
+Read the files that apply before making meaningful changes. For broad architectural or product work, read all of them. Verify time-sensitive claims against the code and tests; when documentation and implementation disagree, call out the mismatch and update the relevant context file as part of the change.
 
-`current-state.md` is the runtime source of truth. `decision-log.md` records why important choices were made.
+## General Working Rules
 
-## Current Product Scope
+- Keep changes focused on the requested outcome.
+- Preserve existing architecture and conventions unless the task explicitly changes them.
+- Fix root causes instead of layering workarounds.
+- Keep presentation, state, domain logic, and data access appropriately separated.
+- Reuse shared resources and abstractions before introducing new ones.
+- Do not describe planned, mocked, or presentation-only behavior as implemented production functionality.
+- Never commit credentials, secrets, privileged keys, recovery material, or private account data.
+- Preserve unrelated user changes in the working tree.
 
-Implemented with mock data:
+## Documentation
 
-- Home with Builder identity, level, Rewards balance, and followed Apps
-- Rewards with balance, receive QR/ID presentation, and mock send form
-- searchable Apps discovery
-- App Squad detail with WIP, Committed Work, and Work History
-- follow/unfollow presentation state
-- three-tab bottom navigation
-- official theBuilderPros logo, web favicon, and Android launcher icons
+Keep documentation synchronized with material changes:
 
-Not implemented:
+- Runtime scope or implementation status: `context/current-state.md`
+- Product scope or terminology: `context/project-overview.md`
+- Architecture or data boundaries: `context/architecture.md`
+- Coding or testing conventions: `context/code-standards.md`
+- Visual rules: `context/ui-context.md`
+- Durable decisions: `context/decision-log.md`
+- Work progress: `context/progress-tracker.md`
+- Contributor workflow: `context/ai-workflow-rules.md`
 
-- authentication or user sessions
-- Supabase or other backend integration
-- real QR generation, clipboard behavior, or Rewards transfer logic
-- persistence across app restarts
-- notifications
-- loading/error/network states
-
-Do not describe mocked behavior as production functionality.
-
-## Domain Language
-
-Use the Builder Workspace terminology:
-
-- `Builder`
-- `App` in Builder-facing UI; `Squad/App` when explaining the relationship
-- `Work Item`, never Task
-- `Committed`, `WIP`, and `Work History`
-- `Rewards`, `Builder Rewards`, `Rewards Balance`; avoid wallet/Web3 wording
-
-Work Items are independent records. App association belongs to `squad_work_item`; Builder participation belongs to link records such as `squad_builder` and `builder_work_item`.
-
-## Architecture Rules
-
-- Preserve Flutter + GetX.
-- Preserve `BaseController`, `BaseView`, bindings, and centralized routes.
-- Keep app-wide resources in `AppColors`, `AppDimens`, `AppString`, `AppImages`, and `AppTheme`.
-- New backend access must go through typed services/repositories, not directly from widgets.
-- Keep Supabase anon credentials public-client-safe and rely on RLS. Never ship service-role keys or account secrets.
-- Prefer feature modules for new capabilities. The current all-in-one `profile` screen/controller is a prototype consolidation and should be split incrementally when logic work begins.
-- Update context files whenever runtime scope, architecture, data contracts, or design rules materially change.
-
-## Design Rules
-
-- Use white cards/navigation over a neutral light background.
-- Use solid black typography; do not introduce gray/dim text without explicit approval.
-- Use orange for primary actions and focused emphasis.
-- Use violet for selected navigation, supporting badges, focus states, and small brand accents.
-- Do not add colored top strips to cards.
-- The short page-title underline is approximately one-third width, mostly orange with a small violet ending.
-- Preserve the official theBuilderPros logo and launcher artwork.
+Avoid status reports, feature inventories, and duplicated context in this file.
 
 ## Verification
 
-Run Flutter commands independently from the project root:
+Run the checks relevant to the change from the repository root. Run them independently so failures are clear:
 
 ```powershell
 flutter pub get
 flutter analyze
-flutter test test\widget_test.dart --reporter expanded
+flutter test
 ```
 
-For an Android artifact:
+Format changed Dart files with `dart format`. Build platform artifacts when the task affects native configuration, packaging, or release output.
 
-```powershell
-flutter build apk --debug
-```
-
-Do not combine test and build commands into a single long shell invocation because it obscures failures and can trigger tool timeouts.
+Report what was verified and any checks that could not be completed.
 
 ## Git
 
 - Canonical repository: `https://github.com/theBuilderPros/TheFlutterBuilderProsApp.git`
 - Primary branch: `main`
-- Keep commits focused and keep the working tree clean before publishing.
-- Never rewrite shared history or force-push unless the user explicitly requests it.
+- Inspect the working tree and diff before staging.
+- Keep commits focused and exclude unrelated changes.
+- Do not rewrite shared history or force-push unless explicitly requested.

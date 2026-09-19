@@ -1,0 +1,13 @@
+sequenceDiagram
+    actor Builder
+    participant Screen as Rewards Screen
+    participant Controller as WalletController
+    participant SDK as WalletSdk
+
+    Builder->>Screen: Interaction 1 - Enter name and phone
+    Builder->>Screen: Interaction 2 - Start activation
+    Screen->>Controller: startActivation()
+    Controller->>SDK: startActivation(builder)
+    SDK-->>Controller: ActivationRequestView
+    Controller-->>Screen: Request view state
+    Screen-->>Builder: Interaction 3 - Show request QR

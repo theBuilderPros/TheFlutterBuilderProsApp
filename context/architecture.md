@@ -2,106 +2,78 @@
 
 ## Stack
 
-| Layer | Technology | Current role |
+| Layer | Technology | Role |
 | --- | --- | --- |
-| UI framework | Flutter / Dart `^3.9.2` | Cross-platform mobile and desktop-capable UI |
-| Design system | Material 3 | Theme, navigation, controls, typography |
-| State and DI | GetX `^4.7.2` | Reactive UI state, bindings, routing |
-| Icons | Material Icons | Current icon system |
-| Testing | `flutter_test` | App-level widget smoke test |
-| Data source | In-memory mock objects | Temporary UI prototype data |
+| UI framework | Flutter / Dart `^3.9.2` | Cross-platform application UI |
+| Design system | Material 3 | Theme, navigation, controls, and typography |
+| State and DI | GetX `^4.7.2` | Reactive state, bindings, dependency injection, and routing |
+| Icons | Material Icons | Application iconography |
+| Testing | `flutter_test` | Unit and widget testing |
 
-There is currently no SVG dependency, auth package, Supabase client, HTTP client, database, or local persistence layer.
+Dependency versions are authoritative in `pubspec.yaml`.
 
-## Startup and Routing
+## Application Structure
 
-1. `lib/main.dart` starts the app.
-2. `lib/main_app.dart` creates `GetMaterialApp`, applies `AppTheme.lightTheme`, initial binding, and route table.
-3. `AppPages` registers one route: `Routes.profileScreen`.
-4. `ProfileBinding` registers `ProfileController` with `Get.lazyPut(..., fenix: true)`.
-5. `ProfileScreen` extends `BaseView<ProfileController>` and renders the entire current mobile shell.
+1. `lib/main.dart` starts the application.
+2. `lib/main_app.dart` creates `GetMaterialApp`, applies the theme and initial binding, and registers centralized routes.
+3. All application features live under `lib/app/features/` and use screen, controller, binding, and feature-local widget folders as needed.
+4. Shared resources live under `lib/app/constant/`.
+5. Shared base abstractions and application bindings live under `lib/app/core/`.
+6. Feature-owned reusable widgets stay under that feature's `widget/` folder. Introduce `lib/app/widget/` only for components that are genuinely shared across unrelated features.
 
-The three bottom tabs are internal reactive state, not separate GetX routes. App Detail is also selected state inside the shell.
+Wallet and App Master are the active presentation features. Wallet owns the shared User Wallet experience. App Master owns the Distributor Dashboard and activation-package presentation while linking to the same Wallet routes for user-role testing. Reusable Builder identity components live under `lib/app/features/profile/widget/`.
 
-## Current Feature Boundary
-
-```text
-lib/app/features/profile/
-├── binding/profile_binding.dart
-├── controller/profile_controller.dart
-└── screen/profile_screen.dart
-```
-
-Despite the directory name, this feature presently contains the whole prototype:
-
-- `_Home`
-- `_Rewards`
-- `_Apps`
-- `_SquadDetail`
-- shared private presentation widgets
-- mock models and records in `ProfileController`
-
-This consolidation reflects current code, but it is not the desired long-term boundary. When real logic begins, extract focused feature modules without rewriting the working shell all at once.
-
-Recommended direction:
+Recommended feature shape:
 
 ```text
-lib/app/features/home/
-lib/app/features/rewards/
-lib/app/features/apps/
-lib/app/features/profile/
-lib/app/data/ or lib/app/services/
+lib/app/features/{feature}/
+|-- binding/
+|-- controller/
+|-- screen/
+`-- widget/
 ```
 
-## Reactive State
+Folders are capability-driven rather than mandatory. For example, Profile currently contains only `widget/`; its screen, controller, binding, and route should be introduced only when a standalone Profile capability returns.
 
-`ProfileController` owns:
+Features with several route-level screens may group them by user journey below `screen/`. The Wallet feature uses `activation/`, `overview/`, `receive/`, `send/`, `history/`, and `security/`. Each route-level screen has its own file; flow barrels and the top-level `wallet_screens.dart` contain exports only. Route-level screen implementations must not be consolidated back into barrel files.
 
-- `tabIndex`
-- `rewardsMode`
-- `selectedSquad`
-- `followedIds`
-- `search`
-- mock Builder, Squad, and Work Item lists
+See `current-state.md` for the exact runtime composition.
 
-Views observe state with `Obx`. Current state lasts only for the process lifetime.
+## State and Presentation Boundary
 
-## Current Mock Types
+- Route-level controllers extend `BaseController`.
+- Route-level screens extend `BaseView<T>`.
+- GetX bindings own controller registration.
+- Views observe reactive state with `Obx`.
+- State mutations belong in controllers or services, not presentation widgets.
+- Process-local UI state must not be treated as persistence.
 
-- `BuilderProfile`: name, email, level
-- `Squad`: id, name, description, status, presentation color value
-- `WorkItem`: squad id, title, outcome, state, cycle, week, week label
+## Data Boundary
 
-These are simplified UI models. They are not complete persistence entities and should be replaced or adapted through typed DTO/domain mappings when the backend is connected.
+Widgets must not access a backend directly. External data flows through typed services or repositories for concerns such as:
 
-## Future Data Boundary
+- authentication and sessions
+- Builder profiles
+- Rewards balances and operations
 
-Widgets must not call Supabase directly. Add service/repository interfaces for:
+Map transport records to typed DTOs or domain models at the data boundary.
 
-- authentication/session
-- Builder profile
-- Apps and follow relationships
-- App Work Items
-- Rewards balance/history/send/receive
+Rewards features depend only on a small `WalletSdk` facade and safe,
+product-facing models. Screens and controllers treat QR values as opaque and must
+not import SDK implementation libraries. Credential protection, QR inspection,
+activation rules, completion, verification, provider communication, and detailed
+diagnostics remain private to the SDK.
 
-The intended shared backend is Supabase Auth + Postgres + RLS. Both Electron and Flutter clients should use public anon credentials and RLS. Service-role keys and secret account material must never ship in this app.
+The production backend and authorization design are not yet selected. Private account material and privileged credentials must never ship in the app.
 
 ## Resource Boundaries
 
 - `AppColors`: brand and semantic colors
 - `AppTheme`: Material component and typography themes
 - `AppDimens`: reusable dimensions
-- `AppString`: app-level strings
+- `AppString`: application strings
 - `AppImages`: asset paths
-- `assets/images/`: official source logo
-- native platform folders: launcher/application branding
+- `assets/images/`: bundled image assets
+- Native platform directories: launcher, package, and application branding
 
-## Known Technical Debt
-
-- `ProfileScreen` and `ProfileController` are too broad.
-- Many private widgets, strings, and dimensions remain inline in the prototype screen.
-- Mock models are coupled to UI state.
-- Real QR, clipboard, forms, validation, loading, and error handling are absent.
-- Test coverage currently verifies only initial Home rendering.
-
-Address these incrementally during logic integration; do not claim they are already resolved.
+Visual rules and token values belong in `ui-context.md`. Current limitations belong in `current-state.md`; actionable architecture work belongs in `progress-tracker.md`.

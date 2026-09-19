@@ -1,0 +1,22 @@
+{
+  "protocolVersion": 27,
+  "xdrRelease": "v27.0",
+  "xdrCommit": "68fa1ac55692f68ad2a2ca549d0a283273554439",
+  "constants": {
+    "keyTypeEd25519": 0,
+    "assetNative": 0,
+    "assetAlphaNum4": 1,
+    "assetAlphaNum12": 2,
+    "operationCreateAccount": 0,
+    "operationPayment": 1,
+    "operationChangeTrust": 6,
+    "preconditionNone": 0,
+    "preconditionTime": 1,
+    "memoNone": 0,
+    "envelopeTypeTransaction": 2,
+    "extensionV0": 0,
+    "maxOperations": 100,
+    "maxSignatures": 20,
+    "maxSignatureBytes": 64
+  }
+}

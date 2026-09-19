@@ -1,0 +1,10 @@
+flowchart TD
+    A[App Master Advanced masked input] --> V[WalletSdk validates endpoint and key]
+    V --> H[Health check NOWNodes]
+    H --> S[Save configuration in protected storage]
+    S --> I[Inject api-key header inside HorizonHttpClient]
+    I --> R[Redact key from logs diagnostics and return values]
+    R --> Q[Send HTTPS request]
+    S --> E[Encrypt configuration for Builder device]
+    E --> D[Authenticated device-bound activation or settings QR]
+    B[Bundled asset source constant or plaintext QR] --> X[Reject configuration]

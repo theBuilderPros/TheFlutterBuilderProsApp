@@ -1,0 +1,33 @@
+sequenceDiagram
+    participant Facade as WalletSdk
+    participant QR as ActivationQrCodec
+    participant Policy as ActivationPolicy
+    participant HTTP as HorizonHttpClient
+    participant XDR as TransactionBuilder
+    participant Signer as SignatureService
+    participant Secure as CredentialStore
+    participant Store as ActivationStore
+
+    Facade->>Secure: Read healthy NOWNodes configuration
+    Secure-->>Facade: Endpoint, API key, and configuration version
+    Facade->>QR: decodeAndValidateRequest(qrValue)
+    QR-->>Facade: Validated request
+    Facade->>Policy: validateRequest(request)
+    Policy-->>Facade: Approved request rules
+    Facade->>HTTP: GET /accounts/distributor
+    HTTP-->>Facade: Sequence and balances
+    Facade->>HTTP: GET /fee_stats
+    HTTP-->>Facade: Fee statistics
+    Facade->>XDR: buildActivationEnvelope(request, state, feePolicy)
+    XDR-->>Facade: Unsigned envelope
+    Facade->>Policy: inspectExactOperations(envelope)
+    Policy-->>Facade: Operation allow-list accepted
+    Facade->>Secure: readAppMasterCredential()
+    Secure-->>Facade: Protected signing handle
+    Facade->>Signer: addAppMasterSignature(envelope, handle)
+    Signer-->>Facade: Partially signed envelope
+    Facade->>QR: Encrypt provider configuration for device
+    Facade->>QR: encodeResponse(requestBinding, envelope, configuration, expiry)
+    QR-->>Facade: Opaque response QR
+    Facade->>Store: saveResponseState()
+    Facade-->>Facade: Return ActivationResponseView

@@ -1,0 +1,15 @@
+sequenceDiagram
+    participant Screen as Rewards Screen
+    participant Controller as WalletController
+    participant SDK as WalletSdk
+
+    Screen->>Controller: App starts or resumes
+    Controller->>SDK: getActivationStatus()
+    SDK-->>Controller: ActivationStatus
+    alt Continue safely
+        Controller-->>Screen: Restore matching screen
+    else Retry is safe
+        Controller-->>Screen: Show retry action
+    else Restart is required
+        Controller-->>Screen: Show start-again action
+    end

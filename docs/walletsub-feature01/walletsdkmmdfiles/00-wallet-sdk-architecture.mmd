@@ -1,0 +1,16 @@
+flowchart LR
+    UI[Flutter Screens] --> C[GetX Controllers]
+    C --> F[WalletSdk Facade]
+    F --> A[Activation Orchestrator]
+    F --> G[Configuration Service]
+    A --> Q[QR Codec]
+    A --> P[Protocol Codec]
+    A --> S[Protected Storage]
+    A --> H[Horizon HTTP Client]
+    A --> R[Reconciliation Service]
+    G --> S
+    G --> H
+    P --> K[Ed25519 and StrKey]
+    P --> X[XDR Reader and Writer]
+    H --> E[Configured Horizon Endpoint]
+    R --> H

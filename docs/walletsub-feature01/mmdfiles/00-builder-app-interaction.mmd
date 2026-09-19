@@ -1,0 +1,19 @@
+sequenceDiagram
+    actor Builder
+    participant BuilderUI as Builder App
+    actor Master as App Master
+    participant MasterUI as App Master App
+
+    Master->>MasterUI: Interaction 0 - Save NOWNodes configuration
+    MasterUI-->>Master: Configuration verified and ready
+    Builder->>BuilderUI: Interaction 1 - Enter name and phone
+    Builder->>BuilderUI: Interaction 2 - Start activation
+    BuilderUI-->>Builder: Interaction 3 - Show request QR
+    Master->>MasterUI: Interaction 4 - Scan or import request QR
+    MasterUI-->>Master: Interaction 5 - Show Builder review
+    Master->>MasterUI: Interaction 6 - Approve setup
+    MasterUI-->>Master: Interaction 7 - Show response QR with protected configuration
+    Builder->>BuilderUI: Interaction 8 - Scan or import response QR
+    BuilderUI-->>Builder: Interaction 9 - Show activation review
+    Builder->>BuilderUI: Interaction 10 - Approve activation
+    BuilderUI-->>Builder: Interaction 11 - Install configuration and show verified Rewards

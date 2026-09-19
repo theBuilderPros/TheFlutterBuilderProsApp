@@ -1,0 +1,19 @@
+sequenceDiagram
+    actor Builder
+    participant Screen as Rewards Screen
+    participant Controller as WalletController
+    participant SDK as WalletSdk
+
+    Builder->>Screen: Interaction 8 - Scan or import response QR
+    Screen->>Controller: inspectResponse(qrValue)
+    Controller->>SDK: inspectActivationResponse(qrValue)
+    SDK-->>Controller: ActivationReview
+    Controller-->>Screen: Safe review state
+    Screen-->>Builder: Interaction 9 - Show activation review
+    Builder->>Screen: Interaction 10 - Approve activation
+    Screen->>Controller: approveActivation(responseId)
+    Controller->>SDK: approveActivation(responseId)
+    Note over SDK: Verify, health-check, and install NOWNodes configuration
+    SDK-->>Controller: ActivationOutcome
+    Controller-->>Screen: Safe outcome state
+    Screen-->>Builder: Interaction 11 - Show verified Rewards

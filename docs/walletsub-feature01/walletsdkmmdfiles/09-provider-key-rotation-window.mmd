@@ -1,0 +1,21 @@
+sequenceDiagram
+    actor Master as App Master
+    participant MasterSDK as App Master WalletSdk
+    participant Provider as Provider Dashboard
+    participant BuilderSDK as Builder WalletSdk
+    participant Roster as Local Builder Roster
+
+    Master->>Provider: Create replacement API key
+    Provider-->>Master: Old and new keys active
+    Master->>MasterSDK: Save configuration version N plus 1
+    loop Each Builder device
+        BuilderSDK-->>MasterSDK: Configuration request QR
+        MasterSDK-->>BuilderSDK: Device-bound update QR
+        BuilderSDK->>BuilderSDK: Validate, health-check, and commit
+        opt Confirmation receipt is used
+            BuilderSDK-->>MasterSDK: Applied-version receipt QR
+            MasterSDK->>Roster: Mark device updated
+        end
+    end
+    Master->>Roster: Review migration policy and known device status
+    Master->>Provider: Revoke old key after overlap window

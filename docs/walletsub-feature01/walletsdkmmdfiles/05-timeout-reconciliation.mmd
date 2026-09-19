@@ -1,0 +1,25 @@
+sequenceDiagram
+    participant Activation as ActivationService
+    participant Store as ActivationStore
+    participant HTTP as HorizonHttpClient
+    participant Reconcile as ActivationReconciler
+
+    Activation->>Store: saveSubmitting(hash, expiry)
+    Activation->>HTTP: POST /transactions
+    HTTP--xActivation: Timeout or interrupted response
+    Activation->>Store: saveVerifying(hash)
+    Activation->>Reconcile: resolve(hash, expiry)
+    loop Bounded polling with backoff
+        Reconcile->>HTTP: GET /transactions/hash
+        alt Confirmed
+            HTTP-->>Reconcile: Included result
+            Reconcile-->>Activation: Verified success
+        else Not found before expiry
+            HTTP-->>Reconcile: 404
+            Reconcile->>Reconcile: Wait with jitter
+        else Definitive rejection
+            HTTP-->>Reconcile: Final failure
+            Reconcile-->>Activation: Verified failure
+        end
+    end
+    Activation->>Store: commitFinalOutcome()

@@ -1,0 +1,24 @@
+sequenceDiagram
+    participant Facade as WalletSdk
+    participant Activation as ActivationRequestService
+    participant Crypto as Ed25519 and StrKey
+    participant Secure as CredentialStore
+    participant Store as ActivationStore
+    participant QR as ActivationQrCodec
+
+    Facade->>Activation: startActivation(builder)
+    Activation->>Store: readPendingRequest()
+    alt Valid request exists
+        Store-->>Activation: Stored request
+        Activation-->>Facade: ActivationRequestView
+    else No valid request
+        Activation->>Crypto: generateIdentity()
+        Crypto-->>Activation: Address and protected seed
+        Activation->>Secure: saveSeed(requestId, seed)
+        Secure-->>Activation: Secure reference
+        Activation->>QR: encodeRequest(builder, address, expiry, challenge)
+        QR-->>Activation: Opaque QR value
+        Activation->>Store: savePendingRequest(metadata, secureReference)
+        Store-->>Activation: Saved
+        Activation-->>Facade: ActivationRequestView
+    end

@@ -1,0 +1,17 @@
+sequenceDiagram
+    participant Service as SDK Service
+    participant Policy as ProviderHeaderPolicy
+    participant HTTP as HorizonHttpClient
+    participant Horizon as Horizon Endpoint
+    participant Mapper as Private Response Mapper
+
+    Service->>Policy: headersFor(environment)
+    Policy-->>Service: Redacted request headers
+    Service->>HTTP: request(method, path, headers, body)
+    HTTP->>HTTP: Enforce HTTPS, deadlines, and size limits
+    HTTP->>Horizon: Direct HTTP request
+    Horizon-->>HTTP: Status, headers, and body
+    HTTP->>HTTP: Validate status and content type
+    HTTP->>Mapper: Parse bounded response
+    Mapper-->>HTTP: Typed private result
+    HTTP-->>Service: Typed result or private failure

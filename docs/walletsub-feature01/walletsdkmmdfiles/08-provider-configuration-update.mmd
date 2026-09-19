@@ -1,0 +1,25 @@
+sequenceDiagram
+    participant BuilderUI as Builder Settings
+    participant BuilderSDK as Builder WalletSdk
+    participant MasterUI as App Master Settings
+    participant MasterSDK as App Master WalletSdk
+    participant Secure as Protected Storage
+
+    BuilderUI->>BuilderSDK: createConfigurationRequest()
+    BuilderSDK->>BuilderSDK: Create challenge and device-bound request
+    BuilderSDK-->>BuilderUI: ConfigurationRequestView with opaque QR
+    MasterUI->>MasterSDK: inspectConfigurationRequest(qrValue)
+    MasterSDK-->>MasterUI: Safe device and environment review
+    MasterUI->>MasterSDK: createConfigurationUpdate(requestId)
+    MasterSDK->>Secure: Read current provider configuration
+    Secure-->>MasterSDK: Endpoint, headers, and new version
+    MasterSDK->>MasterSDK: Encrypt for device and authorize update
+    MasterSDK-->>MasterUI: ConfigurationUpdateView with opaque QR
+    BuilderUI->>BuilderSDK: inspectConfigurationUpdate(qrValue)
+    BuilderSDK->>BuilderSDK: Validate authorization, binding, expiry, replay, and version
+    BuilderSDK-->>BuilderUI: Safe ConfigurationReview
+    BuilderUI->>BuilderSDK: applyConfigurationUpdate(updateId)
+    BuilderSDK->>Secure: Save candidate configuration as pending
+    BuilderSDK->>BuilderSDK: Run provider health check
+    BuilderSDK->>Secure: Promote candidate and remove previous configuration
+    BuilderSDK-->>BuilderUI: ConfigurationOutcome

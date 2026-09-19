@@ -1,0 +1,34 @@
+sequenceDiagram
+    actor Master as App Master
+    participant MasterUI as App Master Advanced
+    participant BuilderSDK as Builder WalletSdk
+    participant BuilderSecure as Builder Protected Storage
+    participant MasterSDK as App Master WalletSdk
+    participant MasterSecure as App Master Protected Storage
+    participant Crypto as Configuration Crypto
+    participant Horizon as Horizon Endpoint
+
+    Master->>MasterUI: Enter NOWNodes endpoint and API key
+    MasterUI->>MasterSDK: saveAppMasterProviderConfiguration(input)
+    MasterSDK->>Horizon: Health check candidate configuration
+    Horizon-->>MasterSDK: Healthy response
+    MasterSDK->>MasterSecure: Commit protected configuration
+    MasterSDK-->>MasterUI: Safe status and configuration version
+    MasterUI-->>Master: Clear key field and show ready
+    BuilderSDK->>BuilderSecure: Create and store device configuration identity
+    BuilderSecure-->>BuilderSDK: Device ID and public encryption key
+    BuilderSDK-->>MasterSDK: Activation request QR with device binding
+    MasterSDK->>MasterSecure: Read provider configuration
+    MasterSecure-->>MasterSDK: Endpoint, headers, and configuration version
+    MasterSDK->>Crypto: Encrypt configuration for Builder device
+    Crypto-->>MasterSDK: Device-bound ciphertext
+    MasterSDK->>MasterSDK: Authorize response and bind request, device, expiry, version
+    MasterSDK-->>BuilderSDK: Activation response QR
+    BuilderSDK->>BuilderSDK: Verify authorization and device binding
+    BuilderSDK->>BuilderSecure: Read device configuration identity
+    BuilderSecure-->>BuilderSDK: Protected decryption handle
+    BuilderSDK->>Crypto: Decrypt candidate configuration
+    Crypto-->>BuilderSDK: Candidate endpoint and provider headers
+    BuilderSDK->>Horizon: Health check with candidate configuration
+    Horizon-->>BuilderSDK: Healthy response
+    BuilderSDK->>BuilderSecure: Commit provider configuration

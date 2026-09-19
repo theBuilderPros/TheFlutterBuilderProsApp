@@ -1,0 +1,24 @@
+sequenceDiagram
+    actor Master as App Master
+    participant Screen as App Master Screen
+    participant Controller as AppMasterController
+    participant SDK as WalletSdk
+
+    Master->>Screen: Interaction 0 - Enter NOWNodes settings in Advanced
+    Screen->>Controller: saveProviderConfiguration(input)
+    Controller->>SDK: saveAppMasterProviderConfiguration(input)
+    SDK-->>Controller: Safe verified status
+    Controller-->>Screen: Clear API key and show ready status
+    Master->>Screen: Interaction 4 - Scan or import request QR
+    Screen->>Controller: inspectRequest(qrValue)
+    Controller->>SDK: inspectBuilderRequest(qrValue)
+    SDK-->>Controller: ActivationRequestReview
+    Controller-->>Screen: Safe review state
+    Screen-->>Master: Interaction 5 - Show Builder review
+    Master->>Screen: Interaction 6 - Approve setup
+    Screen->>Controller: approveRequest(requestId)
+    Controller->>SDK: approveBuilderRequest(requestId)
+    Note over SDK: Include encrypted device-bound NOWNodes configuration
+    SDK-->>Controller: ActivationResponseView
+    Controller-->>Screen: Response view state
+    Screen-->>Master: Interaction 7 - Show protected response QR
